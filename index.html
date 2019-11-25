@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html>
+<body>
+<link href="https://fonts.googleapis.com/css?family=Source+Code+Pro&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/opentype.js@latest/dist/opentype.min.js"></script>
+<style>
+#demo, #demo2 {
+font-family: 'Source Code Pro';
+width:50%;
+
+}
+
+#drop_zone {
+  border: 5px solid blue;
+  width:  200px;
+  height: 100px;
+}
+</style>
+
+
+<input id="file" type="file">
+<p id="demo"></p>
+<br>
+<p id="demo2"></p>
+
+<script>
+var fontjson;
+
+function onReadFile(e) {
+    // document.getElementById('font-name').innerHTML = '';
+    var file = e.target.files[0];
+    var reader = new FileReader();
+    reader.onload = function(e) {
+        try {
+            font = opentype.parse(e.target.result, {lowMemory:true});
+            onFontLoaded(font);
+            console.log('');
+        } catch (err) {
+            console.log(err.toString());
+            if (err.stack) console.log(err.stack);
+	    throw(err);
+        }
+    };
+    reader.onerror = function(err) {
+        console.log(err.toString());
+    };
+
+    reader.readAsArrayBuffer(file);
+}
+
+var fontFileName = 'fonts/SourceCodePro-Bold.otf';
+var fileButton = document.getElementById('file');
+fileButton.addEventListener('change', onReadFile, false);
+
+opentype.load(fontFileName, function(err, font) {
+    var amount, glyph, ctx, x, y, fontSize;
+    if (err) {
+        console.log(err.toString());
+        return;
+    }
+    onFontLoaded(font);
+}, {lowMemory:true});
+
+
+
+function onFontLoaded(font) {
+    window.font = font;
+    console.log(font.names.fontFamily);
+    console.log(font);
+    var fontFamily = font.names.postScriptName.en;
+    //var fontFamily = font.names.fullName.en;
+    // fontFamily = fontFamily.replace(/\s+/g, '');
+    // // document.getElementById("demo").style.fontFamily = fontFamily;
+    // fontFamily += '-';
+    // fontFamily += font.names.fontSubfamily.en;
+    // // fontFamily = fontFamily.replace(/\s+/g, '');
+    // // console.log(fontFamily);
+    fontFamily = fontFamily.replace(/\s+/g, '');
+    document.getElementById("demo").style.fontFamily = fontFamily;
+     //document.getElementById("demo2").style.fontFamily = fontFamily;
+    fontjson = font.tables.cmap.glyphIndexMap;
+    fontList = font.tables.post.glyphNameIndex;
+    var demo = document.getElementById("demo");
+    // demo.removeChild(demo.childNodes[0]);    
+    clearNode(demo);   
+    myFunction();
+    
+
+}
+
+// function dragOverHandler(ev) {
+//   console.log('File(s) in drop zone'); 
+
+//   // Prevent default behavior (Prevent file from being opened)
+//   ev.preventDefault();
+// }
+
+// function dropHandler(ev) {
+//   console.log('File(s) dropped');
+
+//   // Prevent default behavior (Prevent file from being opened)
+//   ev.preventDefault();
+
+//   if (ev.dataTransfer.items) {
+//     // Use DataTransferItemList interface to access the file(s)
+//     for (var i = 0; i < ev.dataTransfer.items.length; i++) {
+//       // If dropped items aren't files, reject them
+//       if (ev.dataTransfer.items[i].kind === 'file') {
+//         var file = ev.dataTransfer.items[i].getAsFile();
+//         console.log('... file[' + i + '].name = ' + file.name);
+
+//         var font = opentype.parse(file,{lowMemory:true});
+//         opentype.load(font, function(err, font) {
+// 		    if (err) {
+// 		        alert('Font could not be loaded: ' + err);
+// 		    } else {
+// 		        // Now let's display it on a canvas with id "canvas"
+// 		        var ctx = document.getElementById('canvas').getContext('2d');
+
+// 		        // Construct a Path object containing the letter shapes of the given text.
+// 		        // The other parameters are x, y and fontSize.
+// 		        // Note that y is the position of the baseline.
+// 		        var path = font.getPath('Hello, World!', 0, 150, 72);
+
+// 		        // If you just want to draw the text you can also use font.draw(ctx, text, x, y, fontSize).
+// 		        path.draw(ctx);
+// 		    }
+// 			});
+
+
+
+//       }
+//     }
+//   } else {
+//     // Use DataTransfer interface to access the file(s)
+//     for (var i = 0; i < ev.dataTransfer.files.length; i++) {
+//       console.log('... file[' + i + '].name = ' + ev.dataTransfer.files[i].name);
+//     }
+//   }
+// }
+
+myFunction();
+
+function myFunction() {
+
+	var json = fontjson;
+	console.log('hello');
+
+
+
+	for(var key in json) {
+		 var res = String.fromCharCode(key);
+		// var res = String.fromCharCode(fontList[i]);
+		//console.log(key);
+		
+		var node = document.createTextNode(res+" ");
+		var para = document.createElement("span");
+		para.appendChild(node);
+		document.getElementById("demo").appendChild(para);
+	}
+
+
+
+  //document.getElementById("demo").innerHTML = res;
+}
+
+function clearNode(node, clone = true) {
+  let emptyNode;
+
+  if (clone) {
+    emptyNode = node.cloneNode();
+    node.parentNode.replaceChild(emptyNode, node);
+    node = emptyNode;
+  }
+  else {
+    while (node.hasChildNodes()) {
+      node.removeChild(node.firstChild);
+    }
+    emptyNode = node;
+  }
+
+  return emptyNode;
+}
+
+function myFunction2() {
+
+	var json = fontjson;
+	console.log('hello');
+
+
+	// for (var i = 0; i < fontList.length; i++) {
+	
+  //document.getElementById("demo").innerHTML = res;
+}
+</script>
+
+<!-- <div id="drop_zone" ondrop="dropHandler(event);" ondragover="dragOverHandler(event);">
+  <p>Drag one or more files to this Drop Zone ...</p>
+</div> -->
+
+</body>
+</html>
