@@ -86,6 +86,22 @@ function onFontLoaded(font) {
     var demo = document.getElementById("demo");
     // demo.removeChild(demo.childNodes[0]);    
     clearNode(demo);   
+
+    
+            var ctx = document.getElementById('canvas');
+        paper.setup(ctx);
+
+        // Construct a Path object containing the letter shapes of the given text.
+        // The other parameters are x, y and fontSize.
+        // Note that y is the position of the baseline.
+        var path = font.getPath('Hello, World!', 0, 150, 72);
+        var svgData = path.toSVG();
+        paper.importSVG(svgData, true)
+
+        // If you just want to draw the text you can also use font.draw(ctx, text, x, y, fontSize).
+        //path.draw(ctx);
+        paper.view.draw();
+
     myFunction(font);
     
 
@@ -168,19 +184,7 @@ function myFunction(font) {
 
 
   // Now let's display it on a canvas with id "canvas"
-        var ctx = document.getElementById('canvas');
-        paper.setup(ctx);
 
-        // Construct a Path object containing the letter shapes of the given text.
-        // The other parameters are x, y and fontSize.
-        // Note that y is the position of the baseline.
-        var path = font.getPath('Hello, World!', 0, 150, 72);
-        var svgData = path.toSVG();
-        paper.importSVG(svgData, true)
-
-        // If you just want to draw the text you can also use font.draw(ctx, text, x, y, fontSize).
-        //path.draw(ctx);
-        paper.view.draw();
 
 
 
