@@ -98,7 +98,7 @@ function onFontLoaded(font) {
         // Note that y is the position of the baseline.
         var path = font.getPath('Hello, World!', 0, 150, 72);
         var svgData = path.toSVG();
-        var paperpath = importSVG(svgData, true)
+        var paperpath = importSVG(svgData)
         paperpath.strokeColor = 'black';
         // If you just want to draw the text you can also use font.draw(ctx, text, x, y, fontSize).
         //path.draw(ctx);
