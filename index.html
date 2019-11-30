@@ -97,7 +97,7 @@ function onFontLoaded(font) {
         // The other parameters are x, y and fontSize.
         // Note that y is the position of the baseline.
         var text = getUrlParam('text', "Hello, World!")
-        var path = font.getPath(text, 0, 250, 250);
+        var path = font.getPath(text, 0, 300, 300);
         var svgData = path.toSVG();
         console.log(svgData);
         var paperpath;
@@ -110,6 +110,7 @@ function onFontLoaded(font) {
         
         paperpath.strokeColor = 'black';
         // paperpath.selected = true;
+        paperpath.selectedColor = 'black';
         paperpath.fullySelected = true;
         // If you just want to draw the text you can also use font.draw(ctx, text, x, y, fontSize).
         //path.draw(ctx);
