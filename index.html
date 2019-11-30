@@ -3,6 +3,7 @@
 <body>
 <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro&display=swap" rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/npm/opentype.js@latest/dist/opentype.min.js"></script>
+<script src="libs/paper-full.js"></script>
 <style>
 #demo, #demo2 {
 font-family: 'Source Code Pro';
@@ -22,8 +23,10 @@ width:50%;
 <p id="demo"></p>
 <br>
 <p id="demo2"></p>
-
+<canvas id="canvas" width="2000px" height="1000px"></canvas>
 <script>
+
+  window.onload = function() {
 var fontjson;
 
 function onReadFile(e) {
@@ -162,6 +165,25 @@ function myFunction() {
 
 
   //document.getElementById("demo").innerHTML = res;
+
+
+  // Now let's display it on a canvas with id "canvas"
+        var ctx = document.getElementById('canvas');
+        paper.setup(ctx);
+
+        // Construct a Path object containing the letter shapes of the given text.
+        // The other parameters are x, y and fontSize.
+        // Note that y is the position of the baseline.
+        var path = font.getPath('Hello, World!', 0, 150, 72);
+        var svgData = path.toSVG();
+        paper.importSVG(svgData, true)
+
+        // If you just want to draw the text you can also use font.draw(ctx, text, x, y, fontSize).
+        //path.draw(ctx);
+        paper.view.draw();
+
+
+
 }
 
 function clearNode(node, clone = true) {
@@ -191,6 +213,10 @@ function myFunction2() {
 	// for (var i = 0; i < fontList.length; i++) {
 	
   //document.getElementById("demo").innerHTML = res;
+
+
+}
+
 }
 </script>
 

@@ -1,0 +1,22 @@
+{
+  "name": "font-loader",
+  "version": "1.0.0",
+  "description": "Quick tool to print out all the available glyphs contained within a font file",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sanschaise/glyph-analyzer.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/sanschaise/glyph-analyzer/issues"
+  },
+  "homepage": "https://github.com/sanschaise/glyph-analyzer#readme",
+  "dependencies": {
+    "paper": "^0.12.3"
+  }
+}
