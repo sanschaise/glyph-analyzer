@@ -100,7 +100,7 @@ function onFontLoaded(font) {
         var svgData = path.toSVG();
         console.log(svgData);
         var paperpath;
-        paper.project.importSVG(svgData {
+        paper.project.importSVG(svgData, {
         expandShapes: true,
         onLoad: function(item) {
           console.log(item);
@@ -108,6 +108,8 @@ function onFontLoaded(font) {
         });
         
         paperpath.strokeColor = 'black';
+        // paperpath.selected = true;
+        paperpath.fullySelected = true;
         // If you just want to draw the text you can also use font.draw(ctx, text, x, y, fontSize).
         //path.draw(ctx);
         view.draw();
