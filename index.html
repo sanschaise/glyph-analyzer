@@ -96,7 +96,8 @@ function onFontLoaded(font) {
         // Construct a Path object containing the letter shapes of the given text.
         // The other parameters are x, y and fontSize.
         // Note that y is the position of the baseline.
-        var path = font.getPath('Hello, World!', 0, 150, 152);
+        var text = getUrlParam(text, "Hello, World!")
+        var path = font.getPath('Hello, World!', 0, 150, 352);
         var svgData = path.toSVG();
         console.log(svgData);
         var paperpath;
@@ -233,6 +234,14 @@ function myFunction2() {
 
 }
 
+}
+
+function getUrlParam(parameter, defaultvalue){
+    var urlparameter = defaultvalue;
+    if(window.location.href.indexOf(parameter) > -1){
+        urlparameter = getUrlVars()[parameter];
+        }
+    return urlparameter;
 }
 </script>
 
