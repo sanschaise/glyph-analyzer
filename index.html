@@ -25,6 +25,8 @@ width:50%;
 <p id="demo2"></p>
 <canvas id="canvas" width="2000px" height="1000px"></canvas>
 <script>
+paper.install(window);
+
 
   window.onload = function() {
 var fontjson;
@@ -87,7 +89,7 @@ function onFontLoaded(font) {
     // demo.removeChild(demo.childNodes[0]);    
     clearNode(demo);   
 
-    
+
             var ctx = document.getElementById('canvas');
         paper.setup(ctx);
 
@@ -96,11 +98,11 @@ function onFontLoaded(font) {
         // Note that y is the position of the baseline.
         var path = font.getPath('Hello, World!', 0, 150, 72);
         var svgData = path.toSVG();
-        paper.importSVG(svgData, true)
-
+        var paperpath = importSVG(svgData, true)
+        paperpath.strokeColor = 'black';
         // If you just want to draw the text you can also use font.draw(ctx, text, x, y, fontSize).
         //path.draw(ctx);
-        paper.view.draw();
+        view.draw();
 
     myFunction(font);
     
