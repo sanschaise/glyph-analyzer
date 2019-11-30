@@ -97,7 +97,8 @@ function onFontLoaded(font) {
         // The other parameters are x, y and fontSize.
         // Note that y is the position of the baseline.
         var text = getUrlParam('text', "Hello, World!")
-        var path = font.getPath(text, 0, 300, 300);
+        var size = getUrlParam('size', 300)
+        var path = font.getPath(text, 0, size, size);
         var svgData = path.toSVG();
         console.log(svgData);
         var paperpath;
@@ -113,7 +114,7 @@ function onFontLoaded(font) {
         paperpath.fullySelected = true;
         paperpath.style = {
           //fillColor: new Color(1, 0, 0),
-          selectedColor:  new Color(0, 0, 0, 1);
+          selectedColor:  new Color(0, 0, 0, 1),
           //strokeWidth: 5
       };
         //paperpath.selectedColor = 'black';
