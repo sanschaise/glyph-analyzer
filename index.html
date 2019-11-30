@@ -110,7 +110,12 @@ function onFontLoaded(font) {
         
         paperpath.strokeColor = 'black';
         // paperpath.selected = true;
-        paperpath.selectedColor = 'black';
+        paperpath.style = {
+          //fillColor: new Color(1, 0, 0),
+          selectedColor: 'black',
+          //strokeWidth: 5
+      };
+        //paperpath.selectedColor = 'black';
         paperpath.fullySelected = true;
         // If you just want to draw the text you can also use font.draw(ctx, text, x, y, fontSize).
         //path.draw(ctx);
