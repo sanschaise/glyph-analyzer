@@ -86,7 +86,7 @@ function onFontLoaded(font) {
     var demo = document.getElementById("demo");
     // demo.removeChild(demo.childNodes[0]);    
     clearNode(demo);   
-    myFunction();
+    myFunction(font);
     
 
 }
@@ -144,7 +144,7 @@ function onFontLoaded(font) {
 
 myFunction();
 
-function myFunction() {
+function myFunction(font) {
 
 	var json = fontjson;
 	console.log('hello');
@@ -174,7 +174,7 @@ function myFunction() {
         // Construct a Path object containing the letter shapes of the given text.
         // The other parameters are x, y and fontSize.
         // Note that y is the position of the baseline.
-        var path = window.font.getPath('Hello, World!', 0, 150, 72);
+        var path = font.getPath('Hello, World!', 0, 150, 72);
         var svgData = path.toSVG();
         paper.importSVG(svgData, true)
 
